@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="./HumanReadables.js"></script>
+        <script src="./EQUiSatAPI.js" type="module"></script>
+    </head>
+
+    <body>
+      See the console output.
+    </body>
+
+    <script>
+        console.log("API Demo");
+
+        getSignalsInPeriod(["LF1REF", "LED3SNS"], 1529996366626, new Date().getTime())
+        .then(function(result) {
+            console.log("getSignalsInPeriod:");
+            console.log(result.data);
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+
+        getSignalsLatest(["LF1REF", "LED3SNS"], 5)
+        .then(function(result) {
+            console.log("getSignalsLatest:");
+            console.log(result.data);
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+
+        getCurrentInfoData(["L2_SNS", "PANELREF"], 10)
+        .then(function(result) {
+            console.log("getCurrentInfoData:");
+            console.log(result.data);
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+        getPreambleData(["num_errors", "MRAM_CPY"], 10)
+        .then(function(result) {
+            console.log("getPreambleData:");
+            console.log(result.data);
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+        getIdleData(["LION_1_CHARGED", "PROG_MEM_REWRITTEN"], 10)
+        .then(function(result) {
+            console.log("getIdleData:");
+            console.log(result.data);
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+        getAttitudeData(["PD_FLASH", "PD_ACCESS"], 10)
+        .then(function(result) {
+            console.log("getAttitudeData:");
+            console.log(result.data);
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+        getFlashBurstData(["LFB2SNS", "LED1TEMP", "LED2TEMP", "LED3TEMP", "LED4TEMP"], 10)
+        .then(function(result) {
+            console.log("getFlashBurstData:");
+            console.log(result.data);
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+        getFlashCompareData(["LFB2SNS", "LED1TEMP", "LED2TEMP", "LED3TEMP", "LED4TEMP"], 10)
+        .then(function(result) {
+            console.log("getFlashCompareData:");
+            console.log(result.data);
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+        getLowPowerData(["L2_SNS"], 10)
+        .then(function(result) {
+            console.log("getLowPowerData:");
+            console.log(result.data);
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+        getErrorCodes(10)
+        .then(function(result) {
+            console.log("getErrorCodes:");
+            console.log(result.data);
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+
+    </script>
+
+    <script>
+        console.log("Human Readables Demo");
+
+        console.log(signalToName("L1_SNS")); // LiOn #1 Current
+        // Ambient temperature at the sensor (in space, this only measures the temperature of the satellite itself)
+        console.log(signalToDescription("IR_FLASH_AMB"));
+
+        console.log(errorCodeToName(75)); // ECODE_UPLINK_REBOOT
+        // A battery charger's fault indicator turned on
+        console.log(errorCodeToDescription(56));
+        // RTOS stack overflow as detected, triggering satellite reboot
+        console.log(errorCodeNameToDescription("ECODE_STACK_OVERFLOW"));
+
+        console.log(errorLocToName(25)); // ELOC_LED1SNS
+        console.log(errorLocToDescription(37)); // LiOn #1 Voltage
+        console.log(errorLocNameToDescription("ELOC_ANTENNA_DEPLOY")); // Antenna Deployment
+
+    </script>
+</html>
