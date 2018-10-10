@@ -30,7 +30,8 @@ function initMap() {
         zoom: 4,   
         minZoom: 2,
         streetViewControl: false,
-        zoomControl: true,
+        zoomControl: false,
+        mapTypeControl: false,
         fullscreenControl: false,
         gestureHandling: "none",
         zoomControlOptions: {

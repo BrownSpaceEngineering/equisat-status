@@ -6,42 +6,42 @@
  */
 
 // converts a raw signal name (string) to a human-readable equivalent name
-export function signalToName(signalName) {
+function signalToName(signalName) {
     return handleNotInObj(signalName, signalNames) || signalNames[signalName];
 }
 
 // converts a raw signal name (string) to a human-readable title-text-like description
-export function signalToDescription(signalName) {
+function signalToDescription(signalName) {
     return handleNotInObj(signalName, signalDescriptions) || signalDescriptions[signalName];
 }
 
 // converts a numeric error code to its string name
-export function errorCodeToName(ecode) {
+function errorCodeToName(ecode) {
     return handleNotInObj(ecode, ecodeNames) || ecodeNames[ecode];
 }
 
 // converts a numeric error code to its human-readable description
-export function errorCodeToDescription(ecode) {
+function errorCodeToDescription(ecode) {
     return errorCodeNameToDescription(errorCodeToName(ecode));
 }
 
 // converts an error code string name to its human-readable description
-export function errorCodeNameToDescription(ecodeName) {
+function errorCodeNameToDescription(ecodeName) {
     return handleNotInObj(ecodeName, ecodeDescriptions) || ecodeDescriptions[ecodeName];
 }
 
 // converts a numeric error location to its string name
-export function errorLocToName(eloc) {
+function errorLocToName(eloc) {
     return handleNotInObj(eloc, elocNames) || elocNames[eloc];
 }
 
 // converts a numeric error location to its human-readable description
-export function errorLocToDescription(eloc) {
+function errorLocToDescription(eloc) {
     return errorLocNameToDescription(errorLocToName(eloc));
 }
 
 // converts an error location string name to its human-readable description
-export function errorLocNameToDescription(elocName) {
+function errorLocNameToDescription(elocName) {
     return handleNotInObj(elocName, elocDescriptions) || elocDescriptions[elocName];
 }
 
