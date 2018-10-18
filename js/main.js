@@ -97,6 +97,47 @@ function drawOrbitLinesAfterMapInit(satCoords, map, strokeColor) {
     }
 }
 
+function printDate(date) {
+    // Create an array with the current month, day and time
+      var dateArr = [ date.getMonth() + 1, date.getDate(), date.getFullYear() ];
+    // Create an array with the current hour, minute and second
+      var timeArr = [ date.getHours(), date.getMinutes() ];
+    // Determine AM or PM suffix based on the hour
+      var suffix = ( timeArr[0] < 12 ) ? "AM" : "PM";
+    // Convert hour from military time
+      timeArr[0] = ( timeArr[0] < 12 ) ? timeArr[0] : timeArr[0] - 12;
+    // If hour is 0, set it to 12
+      timeArr[0] = timeArr[0] || 12;
+    // If seconds and minutes are less than 10, add a zero
+      for ( var i = 1; i < 3; i++ ) {
+        if ( timeArr[i] < 10 ) {
+          timeArr[i] = "0" + timeArr[i];
+        }
+      }
+    // Return the formatted string
+      return dateArr.join("/") + " at " + timeArr.join(":") + " " + suffix;
+}
+
+function getNextPass() {
+    $.get("/getNextPass", (res) => {
+        if (res.statuscode == 200) {
+            var riseTime = this.printDate(new Date(res.response.rise_time*1000));
+            document.getElementById("rise-time-big").innerHTML=riseTime;
+            document.getElementById("rise-time").innerHTML=riseTime;
+            document.getElementById("rise-azimuth").innerHTML=res.response.rise_azimuth.toFixed(2)+"°";
+            document.getElementById("max-elevation-time").innerHTML=this.printDate(new Date(res.response.max_alt_time*1000));
+            document.getElementById("max-elevation").innerHTML=res.response.max_alt.toFixed(2)+"°";
+            document.getElementById("set-time").innerHTML=this.printDate(new Date(res.response.set_time*1000));
+            document.getElementById("set-azimuth").innerHTML=res.response.set_azimuth.toFixed(2)+"°";
+
+            //run function again to get new pass time after the next pass finishes
+            var now = new Date();
+            var msUntilPassFinishes = (res.response.set_time*1000 - new Date().getTime());
+            setTimeout(function() {getNextPass()}, msUntilPassFinishes + 120*1000); //Add 2 minutes just in case to make sure pass is over so we get the next pass.
+        }
+    });
+}
+
 $(document).ready(() => {
     // continually update the location of EQUiSat on the map
     setInterval(() => {
@@ -111,6 +152,10 @@ $(document).ready(() => {
                 map.setCenter(pos);
                 //drawEquisatPath(pos, map)
             }
+            document.getElementById("lat").innerHTML=res.lat;
+            document.getElementById("lng").innerHTML=res.lng;
+            document.getElementById("altitude").innerHTML=res.height.toFixed(2)+"km";
+            document.getElementById("velocity").innerHTML=res.velocity.toFixed(2)+"km/s";
         });
     }, 1000);
 
@@ -118,6 +163,8 @@ $(document).ready(() => {
     setInterval(() => {
         getAndDrawOrbitLines();
     }, 1000*60*5);
+
+    getNextPass();
 
 
 });
