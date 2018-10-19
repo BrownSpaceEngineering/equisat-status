@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>EQUiSat Status</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link rel="stylesheet" type="text/css" href="css/mission-control.css">
+</head>
+<body>
+	<iframe src="index.html" id="status-iframe" class="max-window-iframe"></iframe>
+	<iframe src="http://equisat.brownspace.org/data" id="data-iframe" class="max-window-iframe"></iframe>
+</body>
+<script>
+	window.setInterval("reloadIFrame();", 240000);
+
+	function reloadIFrame() {
+	 document.getElementById("data-iframe").src += "";
+	}
+
+	function setMapPercent(percent) {
+		document.getElementById("status-iframe").style = `height: ${percent}vh;`;
+		document.getElementById("data-iframe").style = `height: ${100-percent}vh;`;
+	}
+</script>
+</html>

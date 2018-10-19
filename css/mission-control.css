@@ -1,0 +1,22 @@
+body {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  background: #1f2229;
+}
+
+.max-window-iframe {
+  width: 100%;
+  border: none;
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+}
+
+#status-iframe {
+  height: 30vh;
+}
+
+#data-iframe {
+  height: 70vh;
+}
