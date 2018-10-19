@@ -3,6 +3,7 @@ body {
   margin: 0;
   padding: 0;
   background: #1f2229;
+  overflow: hidden;
 }
 
 .max-window-iframe {
@@ -19,4 +20,5 @@ body {
 
 #data-iframe {
   height: 70vh;
+  overflow: hidden;
 }
