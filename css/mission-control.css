@@ -15,10 +15,10 @@ body {
 }
 
 #status-iframe {
-  height: 30vh;
+  height: 25vh;
 }
 
 #data-iframe {
-  height: 70vh;
+  height: 75vh;
   overflow: hidden;
 }

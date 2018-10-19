@@ -262,9 +262,17 @@ input.input100 {
 
 #info-container {
 	display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    height: 100%;
+  flex-direction: column;
+  justify-content: flex-start;
+  height: 100%;
+}
+
+#next-pass-info {
+	margin: 1em 0;
+}
+
+#current-info {
+	margin: 1em 0;
 }
 
 .size1 {
